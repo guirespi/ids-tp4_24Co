@@ -41,18 +41,47 @@ extern "C" {
 
 /* === Public data type declarations =========================================================== */
 
+/**
+ * @brief GPIO instance. It contains relevant hardware and software information for the internal
+ * implementation.
+ *
+ */
 typedef struct gpio_s * gpio_t;
 
 /* === Public variable declarations ============================================================ */
 
 /* === Public function declarations ============================================================ */
 
-gpio_t gpioCreate(uint8_t puerto, uint8_t bit);
-
+/**
+ * @brief Create a GPIO instance.
+ *
+ * @param port GPIO port.
+ * @param bit GPIO bit.
+ * @return gpio_t Return GPIO instance.
+ *              - NULL value if error.
+ */
+gpio_t gpioCreate(uint8_t port, uint8_t bit);
+/**
+ * @brief Set GPIO output.
+ *
+ * @param gpio GPIO instance.
+ * @param output Output to set.
+ */
 void gpioSetOutput(gpio_t gpio, bool output);
-
+/**
+ * @brief Set GPIO state.
+ *
+ * @param gpio GPIO instance.
+ * @param state GPIO state to set.
+ */
 void gpioSetState(gpio_t gpio, bool state);
-
+/**
+ * @brief Get GPIO state.
+ *
+ * @param gpio GPIO instance.
+ * @return true GPIO is set.
+ * @return false GPIO is not set.
+ */
 bool gpioGetState(gpio_t gpio);
 
 /* === End of documentation ==================================================================== */

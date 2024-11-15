@@ -45,10 +45,30 @@ extern "C" {
 
 /* === Public function declarations ============================================================ */
 
+/**
+ * @brief Set GPIO direction.
+ *
+ * @param port GPIO port.
+ * @param bit GPIO bit.
+ * @param output GPIO output.
+ */
 void hal_gpio_set_direction(uint8_t port, uint8_t bit, bool output);
-
+/**
+ * @brief Set the GPIO output.
+ *
+ * @param port GPIO port.
+ * @param bit GPIO bit.
+ * @param active GPIO output state.
+ */
 void hal_gpio_set_output(uint8_t port, uint8_t bit, bool active);
-
+/**
+ * @brief Get GPIO input value.
+ *
+ * @param port GPIO port.
+ * @param bit GPIO bit.
+ * @return true GPIO input value is set.
+ * @return false GPIO input value is reset.
+ */
 bool hal_gpio_get_input(uint8_t port, uint8_t bit);
 
 /* === End of documentation ==================================================================== */

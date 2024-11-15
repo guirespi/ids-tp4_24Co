@@ -32,23 +32,26 @@ SPDX-License-Identifier: MIT
 /* === Macros definitions ====================================================================== */
 
 #ifndef MAX_GPIO_INSTANCES
+/*< Max static GPIO instances */
 #define MAX_GPIO_INSTANCES 10
 #endif
 
 /* === Private data type declarations ========================================================== */
 
 struct gpio_s {
-    uint8_t port;
-    uint8_t bit;
-    bool output;
+    uint8_t port; /*< GPIO port*/
+    uint8_t bit;  /*< GPIO bit*/
+    bool output;  /*< GPIO output*/
 #ifndef USE_DYNAMIC_MEM
-    bool used;
+    bool used; /*< For static allocation. Busy state of the instance */
 #endif
 };
 
 /* === Private variable declarations =========================================================== */
 
 /* === Private function declarations =========================================================== */
+
+static gpio_t gpioAllocate(void);
 
 /* === Public variable definitions ============================================================= */
 
@@ -57,6 +60,12 @@ struct gpio_s {
 /* === Private function implementation ========================================================= */
 
 #ifndef USE_DYNAMIC_MEM
+/**
+ * @brief Static allocation of GPIO instance.
+ *
+ * @return gpio_t Return GPIO instance.
+ *              - NULL if no static instance left.
+ */
 static gpio_t gpioAllocate(void) {
     static struct gpio_s instances[MAX_GPIO_INSTANCES] = {0};
 
