@@ -39,11 +39,11 @@ SPDX-License-Identifier: MIT
 /* === Private data type declarations ========================================================== */
 
 struct gpio_s {
-    uint8_t port; /*< GPIO port*/
-    uint8_t bit;  /*< GPIO bit*/
-    bool output;  /*< GPIO output*/
+    uint8_t port; /**< GPIO port */
+    uint8_t bit;  /**< GPIO bit */
+    bool output;  /**< GPIO output */
 #ifndef USE_DYNAMIC_MEM
-    bool used; /*< For static allocation. Busy state of the instance */
+    bool used; /**< For static allocation. Busy state of the instance */
 #endif
 };
 
