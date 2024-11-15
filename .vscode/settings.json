@@ -8,6 +8,7 @@
     },
     "files.associations": {
         "gpio.h": "c",
-        "hal.h": "c"
+        "hal.h": "c",
+        "stdbool.h": "c"
     },
 }

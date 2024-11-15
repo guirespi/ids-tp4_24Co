@@ -20,7 +20,7 @@ SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
 /** @file hal.c
- ** @brief Definición de las funciones HAL.
+ ** @brief HAL function implementations.
  **/
 
 /* === Headers files inclusions =============================================================== */

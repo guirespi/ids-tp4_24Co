@@ -20,7 +20,7 @@ SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
 /** @file gpio.c
- ** @brief Definición de las funciones GPIO.
+ ** @brief GPIO function implementations.
  **/
 
 /* === Headers files inclusions =============================================================== */

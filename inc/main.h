@@ -1,5 +1,5 @@
 /************************************************************************************************
-Copyright (c) 2023, Esteban Volentini <evolentini@herrera.unt.edu.ar>
+Copyright (c) 2023, Guido Ramirez <guidoramirez7@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -23,12 +23,12 @@ SPDX-License-Identifier: MIT
 #define MAIN_H
 
 /** @file main.h
- ** @brief Definición de la función principal del programa
+ ** @brief Main function definition.
  **/
 
 /* === Headers files inclusions ================================================================ */
 
-/* === Cabecera C++ ============================================================================ */
+/* === C++ header ============================================================================ */
 
 #ifdef __cplusplus
 extern "C" {
@@ -42,12 +42,12 @@ extern "C" {
 
 /* === Public function declarations ============================================================ */
 
-/* Comentario normal */
-
 /**
- * @brief Función principal del sistema, se ejecuta al iniciar el programa
+ * @brief Main system's function. It executes at start.
  *
- * @return int Valor de retorno, cero si esta todo bien, negativo si hay un error
+ * @return int Return value.
+ *              - 0 if no error.
+ *              - Otherwise error.
  */
 int main(void);
 

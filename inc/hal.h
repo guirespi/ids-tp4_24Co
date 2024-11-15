@@ -1,5 +1,5 @@
 /************************************************************************************************
-Copyright (c) 2023, Esteban Volentini <evolentini@herrera.unt.edu.ar>
+Copyright (c) 2023, Guido Ramirez <guidoramirez7@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -23,7 +23,7 @@ SPDX-License-Identifier: MIT
 #define HAL_H
 
 /** @file hal.h
- ** @brief Funciones HAL.
+ ** @brief HAL public header.
  **/
 
 /* === Headers files inclusions ================================================================ */
@@ -31,7 +31,7 @@ SPDX-License-Identifier: MIT
 #include <stdbool.h>
 #include <stdint.h>
 
-/* === Cabecera C++ ============================================================================ */
+/* === C++ header ============================================================================ */
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,8 +44,6 @@ extern "C" {
 /* === Public variable declarations ============================================================ */
 
 /* === Public function declarations ============================================================ */
-
-/* Comentario normal */
 
 void hal_gpio_set_direction(uint8_t port, uint8_t bit, bool output);
 

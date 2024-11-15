@@ -20,7 +20,7 @@ SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
 /** @file main.c
- ** @brief Definición de la función principal del programa
+ ** @brief Main function definition.
  **/
 
 /* === Headers files inclusions =============================================================== */
