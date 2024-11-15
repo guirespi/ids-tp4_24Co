@@ -19,14 +19,17 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef GPIO_H
+#define GPIO_H
 
-/** @file main.h
- ** @brief Definición de la función principal del programa
+/** @file gpio.h
+ ** @brief Funciones GPIO
  **/
 
 /* === Headers files inclusions ================================================================ */
+
+#include <stdint.h>
+#include <stdbool.h>
 
 /* === Cabecera C++ ============================================================================ */
 
@@ -38,18 +41,19 @@ extern "C" {
 
 /* === Public data type declarations =========================================================== */
 
+typedef struct gpio_s * gpio_t;
+
 /* === Public variable declarations ============================================================ */
 
 /* === Public function declarations ============================================================ */
 
-/* Comentario normal */
+gpio_t gpioCreate(uint8_t puerto, uint8_t bit);
 
-/**
- * @brief Función principal del sistema, se ejecuta al iniciar el programa
- *
- * @return int Valor de retorno, cero si esta todo bien, negativo si hay un error
- */
-int main(void);
+void gpioSetOutput(gpio_t gpio, bool output);
+
+void gpioSetState(gpio_t gpio, bool state);
+
+bool gpioGetState(gpio_t gpio);
 
 /* === End of documentation ==================================================================== */
 
@@ -57,4 +61,4 @@ int main(void);
 }
 #endif
 
-#endif /* MAIN_H */
+#endif /* GPIO_H */

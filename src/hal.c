@@ -19,19 +19,15 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
-/** @file main.c
- ** @brief Definición de la función principal del programa
+/** @file hal.c
+ ** @brief Definición de las funciones HAL.
  **/
 
 /* === Headers files inclusions =============================================================== */
 
-#include "main.h"
-#include "gpio.h"
+#include "hal.h"
 
 /* === Macros definitions ====================================================================== */
-
-#define LED_ROJO_PORT (1)
-#define LED_ROJO_BIT  (7)
 
 /* === Private data type declarations ========================================================== */
 
@@ -47,11 +43,16 @@ SPDX-License-Identifier: MIT
 
 /* === Public function implementation ========================================================== */
 
-int main(void) {
-    gpio_t red_led = gpioCreate(LED_ROJO_PORT, LED_ROJO_BIT);
-    gpioSetOutput(red_led, true);
-    gpioSetState(red_led, false);
-    return 0;
+void hal_gpio_set_direction(uint8_t port, uint8_t bit, bool output) {
+    ;
+}
+
+void hal_gpio_set_output(uint8_t port, uint8_t bit, bool active) {
+    ;
+}
+
+bool hal_gpio_get_input(uint8_t port, uint8_t bit) {
+    ;
 }
 
 /* === End of documentation ==================================================================== */
