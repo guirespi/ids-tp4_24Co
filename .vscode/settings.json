@@ -11,6 +11,7 @@
         "hal.h": "c",
         "stdbool.h": "c",
         "led.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "cstdlib": "c"
     },
 }

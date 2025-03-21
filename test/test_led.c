@@ -1,29 +1,70 @@
-#include <stdint.h>
-#include <unity.h>
+/************************************************************************************************
+Copyright (c) 2025, Guido Ramirez <guidoramirez7@gmail.com>
 
-#include "led.h"
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
+OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+SPDX-License-Identifier: MIT
+*************************************************************************************************/
 
 /**
- * @test Con la inicialización todos los LEDs quedan apagados.
- * @test Prender un LED individual.
- * @test Apagar un LED individual.
- * @test Prender y apagar múltiples LED’s.
- * @test Prender todos los LEDs de una vez.
- * @test Apagar todos los LEDs de una vez.
- * @test Consultar el estado de un LED que está encendido
- * @test Consultar el estado de un LED que est apagado
- * @test Revisar limites de los parametros.
- * @test Revisar parámetros fuera de los limites.
+ * @file test_led.c
+ * @brief Unit tests for the LED module.
  */
 
-static uint16_t led_address = 0xffff;
+/* === Headers files inclusions =============================================================== */
+
+#include "led.h"
+#include "unity.h"
+
+/* === Macros definitions ====================================================================== */
+
+/**
+ * @brief Invalid LED position above the maximum allowed value.
+ *
+ * This macro represents an out-of-bounds LED position that is greater than
+ * the maximum valid LED position (`LED_MAX_POS`).
+ */
+#define INVALID_LED_POS_TOP (LED_MAX_POS + 1)
+
+/**
+ * @brief Invalid LED position below the minimum allowed value.
+ */
+#define INVALID_LED_POS_BOTTOM (0)
+
+/* === Private data type declarations ========================================================== */
+
+/* === Private variable declarations =========================================================== */
+
+/* === Private function declarations =========================================================== */
+
+/* === Public variable definitions ============================================================= */
+
+/* === Private variable definitions ============================================================ */
+
+/**
+ * @brief Test led address value and register.
+ */
+static uint16_t led_address = 0xFFFF;
+
+/* === Private function implementation ========================================================= */
+
+/* === Public function implementation ========================================================== */
 
 void setUp(void) {
     led_init(&led_address);
-}
-
-void tearDown(void) {
-    ;
 }
 
 //! @test All initialized leds are turn off.
@@ -71,6 +112,7 @@ void test_turn_on_off_multiple_led(void) {
 
 //! @test Turn on all leds.
 void test_turn_on_all_leds(void) {
+
     led_turn_on_all();
 
     TEST_ASSERT_EQUAL_HEX16(0xFFFF, led_address);
@@ -78,9 +120,8 @@ void test_turn_on_all_leds(void) {
 
 //! @test Turn off all leds.
 void test_turn_off_all_leds(void) {
-    // Turn on all leds with previous tested function.
+
     led_turn_on_all();
-    // Turn off all leds.
     led_turn_off_all();
 
     TEST_ASSERT_EQUAL_HEX16(0x0000, led_address);
@@ -99,9 +140,7 @@ void test_check_turn_on_led(void) {
 void test_check_turn_off_led(void) {
     uint8_t led_pos = 5;
 
-    // Turn on all leds with previous tested function.
     led_turn_on_all();
-    // Turn it off just one led to check it later.
     led_turn_off(led_pos);
 
     TEST_ASSERT_EQUAL(false, led_is_on(led_pos));
@@ -109,38 +148,37 @@ void test_check_turn_off_led(void) {
 
 //! @test Check off limits led to turn on and off
 void test_check_off_limits_leds_for_turn_on_off(void) {
-    uint8_t led_pos = 20;
 
-    // Turn off all leds.
     led_turn_off_all();
-    // Try to turn on an off limits led.
-    led_turn_on(led_pos);
 
-    TEST_ASSERT_EQUAL_HEX16(0x0000, led_address); // Check all are still off.
+    led_turn_on(INVALID_LED_POS_TOP);
+    led_turn_on(INVALID_LED_POS_BOTTOM);
 
-    // Turn on all valid leds.
+    TEST_ASSERT_EQUAL_HEX16(0x0000, led_address);
+
     led_turn_on_all();
-    // Try to turn off an off limits led.
-    led_turn_off(led_pos);
 
-    TEST_ASSERT_EQUAL_HEX16(0xFFFF, led_address); // Check all are still on.
+    led_turn_off(INVALID_LED_POS_TOP);
+    led_turn_off(INVALID_LED_POS_BOTTOM);
+
+    TEST_ASSERT_EQUAL_HEX16(0xFFFF, led_address);
 }
 
 //! @test Check off limits led to check state
 void test_check_off_limits_leds_for_check_state(void) {
-    uint8_t led_pos = 20;
 
-    // Turn on all valid leds.
     led_turn_on_all();
 
-    TEST_ASSERT_EQUAL(false, led_is_on(led_pos)); // Check if off limits led is off.
+    TEST_ASSERT_EQUAL(false, led_is_on(INVALID_LED_POS_TOP));
+    TEST_ASSERT_EQUAL(false, led_is_on(INVALID_LED_POS_BOTTOM));
 
-    // Turn off all valid leds.
     led_turn_off_all();
-    // Try to turn on an off limits led.
-    led_turn_on(led_pos);
 
-    TEST_ASSERT_EQUAL(false, led_is_on(led_pos)); // Check if off limits led is off.
+    led_turn_on(INVALID_LED_POS_TOP);
+    led_turn_on(INVALID_LED_POS_BOTTOM);
+
+    TEST_ASSERT_EQUAL(false, led_is_on(INVALID_LED_POS_TOP));
+    TEST_ASSERT_EQUAL(false, led_is_on(INVALID_LED_POS_BOTTOM));
 }
 
 //! @test Check off limits led to check state
@@ -152,3 +190,5 @@ void test_check_null_led_register_for_init(void) {
 
     TEST_ASSERT_NOT_EQUAL(invalid_addr, &led_address);
 }
+
+/* === End of documentation ==================================================================== */
