@@ -9,6 +9,9 @@
     "files.associations": {
         "gpio.h": "c",
         "hal.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "led.h": "c",
+        "stdint.h": "c",
+        "cstdlib": "c"
     },
 }

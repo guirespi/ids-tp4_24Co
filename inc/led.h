@@ -1,5 +1,5 @@
 /************************************************************************************************
-Copyright (c) 2023, Guido Ramirez <guidoramirez7@gmail.com>
+Copyright (c) 2025, Guido Ramirez <guidoramirez7@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 associated documentation files (the "Software"), to deal in the Software without restriction,
@@ -19,17 +19,17 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 SPDX-License-Identifier: MIT
 *************************************************************************************************/
 
-#ifndef HAL_H
-#define HAL_H
+#ifndef LED_H
+#define LED_H
 
-/** @file hal.h
- ** @brief HAL public header.
+/** @file led.h
+ ** @brief Led's functions declaration.
  **/
 
 /* === Headers files inclusions ================================================================ */
 
-#include <stdbool.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 /* === C++ header ============================================================================ */
 
@@ -39,6 +39,11 @@ extern "C" {
 
 /* === Public macros definitions =============================================================== */
 
+/**
+ * @brief Maximum position of the LEDs (0-based index).
+ */
+#define LED_MAX_POS (16)
+
 /* === Public data type declarations =========================================================== */
 
 /* === Public variable declarations ============================================================ */
@@ -46,30 +51,43 @@ extern "C" {
 /* === Public function declarations ============================================================ */
 
 /**
- * @brief Set GPIO direction.
+ * @brief Initialize the led's register.
  *
- * @param port GPIO port.
- * @param bit GPIO bit.
- * @param output GPIO output.
+ * @param led_reg Led's register address.
  */
-void hal_gpio_set_direction(uint8_t port, uint8_t bit, bool output);
+void led_init(uint16_t * led_reg);
+
 /**
- * @brief Set the GPIO output.
+ * @brief Turns on a specific LED.
  *
- * @param port GPIO port.
- * @param bit GPIO bit.
- * @param active GPIO output state.
+ * @param led_pos The position of the LED to turn on (1-based index).
  */
-void hal_gpio_set_output(uint8_t port, uint8_t bit, bool active);
+void led_turn_on(uint8_t led_pos);
+
 /**
- * @brief Get GPIO input value.
+ * @brief Turns off a specific LED.
  *
- * @param port GPIO port.
- * @param bit GPIO bit.
- * @return true GPIO input value is set.
- * @return false GPIO input value is reset.
+ * @param led_pos The position of the LED to turn off (1-based index).
  */
-bool hal_gpio_get_input(uint8_t port, uint8_t bit);
+void led_turn_off(uint8_t led_pos);
+
+/**
+ * @brief Turns on all LEDs.
+ */
+void led_turn_on_all(void);
+
+/**
+ * @brief Turns off all LEDs.
+ */
+void led_turn_off_all(void);
+
+/**
+ * @brief Checks if a specific LED is on.
+ *
+ * @param led_pos The position of the LED to check (1-based index).
+ * @return true if the LED is on, false otherwise.
+ */
+bool led_is_on(uint8_t led_pos);
 
 /* === End of documentation ==================================================================== */
 
@@ -77,4 +95,4 @@ bool hal_gpio_get_input(uint8_t port, uint8_t bit);
 }
 #endif
 
-#endif /* HAL_H */
+#endif /* LED_H */
