@@ -100,12 +100,13 @@ static bool is_led_pos_valid(uint8_t led_pos) {
 
 /* === Public function implementation ========================================================== */
 
-void led_init(uint16_t * led_reg) {
+led_err_t led_init(uint16_t * led_reg) {
     if (led_reg == NULL)
-        return;
+        return LED_E_ARG;
 
     port_address = led_reg;
     *port_address = LED_STATE_ALL_OFF;
+    return LED_OK;
 }
 
 void led_turn_on(uint8_t led_pos) {

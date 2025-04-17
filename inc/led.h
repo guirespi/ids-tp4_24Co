@@ -46,16 +46,27 @@ extern "C" {
 
 /* === Public data type declarations =========================================================== */
 
+typedef enum {
+    LED_OK = 0,   /* Led operation is Ok */
+    LED_E_ARG = 1 /* Led operation received invalid argument */
+} led_err_t;
+
 /* === Public variable declarations ============================================================ */
 
 /* === Public function declarations ============================================================ */
 
 /**
- * @brief Initialize the led's register.
+ * @brief Initializes the LED register.
  *
- * @param led_reg Led's register address.
+ * This function sets up the LED register by assigning the provided address
+ * and turning off all LEDs initially.
+ *
+ * @param led_reg Pointer to the LED register address.
+ *                Must not be `NULL`.
+ * @return `LED_OK` if the initialization was successful.
+ *         `LED_E_ARG` if the provided pointer is `NULL`.
  */
-void led_init(uint16_t * led_reg);
+led_err_t led_init(uint16_t * led_reg);
 
 /**
  * @brief Turns on a specific LED.

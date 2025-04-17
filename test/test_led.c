@@ -71,7 +71,8 @@ void setUp(void) {
 void test_all_leds_initialized_start_off(void) {
     uint16_t led_address = 0xFFFF;
 
-    led_init(&led_address);
+    led_err_t rt = led_init(&led_address);
+    TEST_ASSERT_EQUAL(LED_OK, rt);
     TEST_ASSERT_EQUAL_HEX16(0x0000, led_address);
 }
 
@@ -186,9 +187,9 @@ void test_check_null_led_register_for_init(void) {
     uint16_t * invalid_addr = NULL;
 
     // We do not allow null adress so the other functions don't commit ilegal access.
-    led_init(invalid_addr);
+    led_err_t rt = led_init(invalid_addr);
 
-    TEST_ASSERT_NOT_EQUAL(invalid_addr, &led_address);
+    TEST_ASSERT_EQUAL(LED_E_ARG, rt);
 }
 
 /* === End of documentation ==================================================================== */
