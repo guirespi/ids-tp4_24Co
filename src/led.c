@@ -109,6 +109,13 @@ led_err_t led_init(uint16_t * led_reg) {
     return LED_OK;
 }
 
+void led_deinit(void) {
+    if (port_address != NULL) {
+        *port_address = LED_STATE_ALL_OFF;
+        port_address = NULL;
+    }
+}
+
 void led_turn_on(uint8_t led_pos) {
     if (!is_port_address_valid() || !is_led_pos_valid(led_pos))
         return;

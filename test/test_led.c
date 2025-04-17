@@ -192,4 +192,11 @@ void test_check_null_led_register_for_init(void) {
     TEST_ASSERT_EQUAL(LED_E_ARG, rt);
 }
 
+void test_check_led_deinit(void) {
+    led_turn_on_all();
+    led_deinit();
+
+    TEST_ASSERT_EQUAL_HEX16(0x0000, led_address);
+}
+
 /* === End of documentation ==================================================================== */
