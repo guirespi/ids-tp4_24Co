@@ -199,4 +199,17 @@ void test_check_led_deinit(void) {
     TEST_ASSERT_EQUAL_HEX16(0x0000, led_address);
 }
 
+void test_check_led_deinit_and_use_api(void) {
+    led_deinit();
+    led_turn_on_all();
+    led_turn_on(1);
+    bool rt = led_is_on(1);
+    led_turn_off(1);
+
+    led_deinit(); // Try to deinit twice.
+
+    TEST_ASSERT_EQUAL(false, rt);
+    TEST_ASSERT_EQUAL_HEX16(0x0000, led_address);
+}
+
 /* === End of documentation ==================================================================== */
