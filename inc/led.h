@@ -69,6 +69,14 @@ typedef enum {
 led_err_t led_init(uint16_t * led_reg);
 
 /**
+ * @brief Deinitializes the LED register.
+ *
+ * This function resets the LED register by turning off all LEDs and
+ * clearing the pointer to the LED register address.
+ */
+void led_deinit(void);
+
+/**
  * @brief Turns on a specific LED.
  *
  * @param led_pos The position of the LED to turn on (1-based index).
